@@ -16,7 +16,7 @@ Source: `scope.md > Who It's For`, `The Unique Kernel`, and `The Core Loop`.
 4. Each Real Talk suggestion quotes text the user actually provided and explains what could improve. Its matching rewrite appears in the separate Rewrite section below. If the resume does not provide facts needed for a rewrite, it uses a clear placeholder rather than making anything up.
 5. The user reads the roast and can use the suggestions to improve their resume.
 
-If the input is empty or has fewer than five words, show a more pointed roast about the missing or minimal input and leave Real Talk and Rewrite empty. Do not call Gemini or invent resume details.
+If the input is empty or has fewer than five words, show a more pointed roast about the missing or minimal input and leave Real Talk and Rewrite empty. Do not call the model or invent resume details.
 Source: `scope.md > The Core Loop` and `What "Working" Looks Like`.
 
 ## Screens and Layout
@@ -37,7 +37,7 @@ Source: `scope.md > Inspiration & Identity`; the learner confirmed the current c
 - With enough text to review, show a short roast and every distinct, actionable, resume-grounded feedback item, prioritized by importance. Do not impose a fixed suggestion count or include weak/repetitive items.
 - Every Real Talk item contains a quote from the submitted resume and an explanation of the issue. Show the matching suggested rewrite in a separate Rewrite section below Real Talk.
 - Rewrites must not invent accomplishments or other facts. Use an unmistakable placeholder when relevant facts are missing.
-- When the input is empty or has fewer than five words, show only the roast; leave Real Talk and Rewrite empty and do not call Gemini. A blank submission gets a more pointed roast about not entering text.
+- When the input is empty or has fewer than five words, show only the roast; leave Real Talk and Rewrite empty and do not call the model. A blank submission gets a more pointed roast about not entering text.
 - The roast remains funny rather than cruel, including when the user submits little or no text.
 
 **Acceptance criteria**
@@ -45,14 +45,14 @@ Source: `scope.md > Inspiration & Identity`; the learner confirmed the current c
 - [ ] Submitting a usable resume produces a roast and all distinct, actionable, grounded feedback supported by its text, with no fixed three-item limit.
 - [ ] Each Real Talk item quotes text present in the submitted resume and includes an explanation; its corresponding rewrite appears only in the separate Rewrite section.
 - [ ] A rewrite never presents a missing accomplishment or fact as true; it uses a clear placeholder instead.
-- [ ] Submitting empty text or fewer than five words displays only a roast, with Real Talk and Rewrite empty and no Gemini request.
+- [ ] Submitting empty text or fewer than five words displays only a roast, with Real Talk and Rewrite empty and no model request.
 - [ ] The page displays a truthful note about pasted-text handling; its wording matches the actual behavior.
 
 ## States and Boundaries
 
 - **Before submission** — The user can see where to paste their resume and where the two kinds of results will appear.
 - **Enough text to review** — Show the roast, all useful prioritized grounded suggestions in Real Talk, and their matching rewrites in the separate Rewrite section.
-- **Empty or fewer than five words** — Show the roast only; leave Real Talk and Rewrite empty without calling Gemini.
+- **Empty or fewer than five words** — Show the roast only; leave Real Talk and Rewrite empty without calling the model.
 - **Pasted-text handling** — Explain accurately what happens to submitted text. Do not promise that it is not stored unless the implementation guarantees that.
 
 ## Product Decisions
@@ -60,7 +60,7 @@ Source: `scope.md > Inspiration & Identity`; the learner confirmed the current c
 - Keep the product to one page and one paste-to-results flow; accounts, file uploads, and a persistent database are outside this proof of concept.
 - Preserve the split between a playful roast and useful, grounded feedback; it is the distinctive part of the idea.
 - Include every distinct, actionable feedback item supported by the resume; do not pad weak suggestions or cap the list at three.
-- For empty input or text with fewer than five words, show a roast only and leave Real Talk and Rewrite empty without calling Gemini.
+- For empty input or text with fewer than five words, show a roast only and leave Real Talk and Rewrite empty without calling the model.
 - Keep the current orange-and-blue colors.
 
 ## What We're Building
@@ -89,7 +89,7 @@ No later features have been identified yet.
 
 ## Resolved in 4-spec
 
-- The app sends pasted resume text from its backend to Google's Gemini API for review. The app does not save resumes or results to a database or browser storage. Google's unpaid Gemini API terms may allow submitted content to be used to improve Google products and processed by human reviewers, so the page must disclose this accurately. See `spec.md > Data Model` and `spec.md > Decisions and Open Issues`.
+- The app sends pasted resume text from its backend through OpenRouter to the selected model provider for review. The app does not save resumes or results to a database or browser storage. The page must disclose this route and direct users to the applicable data terms. See `spec.md > Data Model` and `spec.md > Decisions and Open Issues`.
 
 ## Open Questions
 

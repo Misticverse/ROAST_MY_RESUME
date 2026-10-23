@@ -101,7 +101,7 @@
       <div class="eyebrow">Build With AI: Basics · Technical Spec</div>
       <h1>ROAST MY RESUME</h1>
       <p class="intro">Paste resume text, get a playful roast, and see all useful grounded suggestions for making the resume clearer and stronger.</p>
-      <p class="meta">Proof-of-concept blueprint · Status: approved · Local website + small Node server + Gemini API</p>
+      <p class="meta">Proof-of-concept blueprint · Status: approved · Local website + small Node server + OpenRouter</p>
     </header>
 
     <section aria-labelledby="plain-title">
@@ -113,11 +113,11 @@
         </article>
         <article class="panel flow-step">
           <h3>2 · Send safely</h3>
-          <p>A small server receives the text. It keeps the Gemini key out of browser code.</p>
+          <p>A small server receives the text. It keeps the OpenRouter key out of browser code.</p>
         </article>
         <article class="panel flow-step">
           <h3>3 · Review</h3>
-          <p>The server sends the resume to Gemini and checks its reply.</p>
+          <p>The server sends the resume through OpenRouter to the selected model and checks its reply.</p>
         </article>
         <article class="panel flow-step">
           <h3>4 · Show</h3>
@@ -126,7 +126,7 @@
       </div>
       <svg class="diagram" viewBox="0 0 900 190" role="img" aria-labelledby="flow-title flow-desc">
         <title id="flow-title">Resume review data flow</title>
-        <desc id="flow-desc">The browser sends resume text to the local Node server, the server sends it to Google Gemini, and the review returns through the server to the browser.</desc>
+        <desc id="flow-desc">The browser sends resume text to the local Node server, the server sends it through OpenRouter to the selected model provider, and the review returns through the server to the browser.</desc>
         <defs>
           <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
             <path d="M0,0 L0,6 L9,3 z" fill="#1c1c23"></path>
@@ -139,7 +139,7 @@
         <text x="120" y="110" text-anchor="middle" font-size="13" fill="#514f5c">text + results, temporary</text>
         <text x="452" y="88" text-anchor="middle" font-weight="700" fill="#1c1c23">Node server</text>
         <text x="452" y="110" text-anchor="middle" font-size="13" fill="#514f5c">key stays here</text>
-        <text x="780" y="88" text-anchor="middle" font-weight="700" fill="#1c1c23">Google Gemini</text>
+        <text x="780" y="88" text-anchor="middle" font-weight="700" fill="#1c1c23">OpenRouter + model</text>
         <text x="780" y="110" text-anchor="middle" font-size="13" fill="#514f5c">provider processes text</text>
         <line x1="215" y1="75" x2="350" y2="75" stroke="#1c1c23" stroke-width="2" marker-end="url(#arrow)"></line>
         <line x1="555" y1="75" x2="685" y2="75" stroke="#1c1c23" stroke-width="2" marker-end="url(#arrow)"></line>
@@ -154,7 +154,7 @@
 
     <section aria-labelledby="privacy-title">
       <h2 id="privacy-title">WHAT HAPPENS TO THE TEXT</h2>
-      <p class="privacy panel">The app does not save resumes or results in a database, browser storage, or app logs. To create a review, the website sends the text to Google's Gemini API. Google's unpaid API terms may allow submitted content to be used to improve products and processed by human reviewers. The page must disclose this clearly; do not enter sensitive information in the demo.</p>
+      <p class="privacy panel">The app does not save resumes or results in a database, browser storage, or app logs. To create a review, the website sends the text through OpenRouter to the selected model provider. Data handling depends on their applicable terms and settings. Do not enter sensitive information unless you have reviewed those terms.</p>
     </section>
 
     <section aria-labelledby="journey-title">
@@ -166,13 +166,13 @@
       </div>
       <article class="step-panel" id="panel-paste" role="tabpanel" aria-labelledby="tab-paste">
         <h3>Paste the resume</h3>
-        <p>Open the one-page website, paste text, and submit. Empty text is handled without sending an unnecessary Gemini request.</p>
+        <p>Open the one-page website, paste text, and submit. Empty text is handled without sending an unnecessary model request.</p>
         <p class="path">Files: public/index.html · public/app.js</p>
       </article>
       <article class="step-panel" id="panel-request" role="tabpanel" aria-labelledby="tab-request" hidden>
-        <h3>Ask Gemini for resume feedback</h3>
+        <h3>Ask the selected model for resume feedback</h3>
         <p>The server keeps the API key private, sends a focused resume-writing prompt, and checks that the reply is valid and grounded in the supplied text.</p>
-        <p class="path">Files: server.js · server/gemini.js</p>
+        <p class="path">Files: server.js · server/openrouter.js</p>
       </article>
       <article class="step-panel" id="panel-results" role="tabpanel" aria-labelledby="tab-results" hidden>
         <h3>Read the results</h3>
@@ -188,9 +188,9 @@
 
     <section aria-labelledby="stack-title">
       <h2 id="stack-title">STACK AND RUNNING IT</h2>
-      <p>Plain HTML/CSS/JavaScript for the page; Node.js and Express for the small local server; Gemini API for the review. No database, login, upload, or separate deployment service.</p>
-      <p>Set <code>GEMINI_API_KEY</code> in a local <code>.env</code> file, run <code>npm install</code>, then <code>npm start</code> and open <code>http://localhost:5500</code>.</p>
-      <p class="small">The model ID should be confirmed against the account's current free-tier availability during the first build step.</p>
+      <p>Plain HTML/CSS/JavaScript for the page; Node.js and Express for the small local server; OpenRouter and the selected model for the review. No database, login, upload, or separate deployment service.</p>
+      <p>Set <code>OPENROUTER_API_KEY</code> and <code>OPENROUTER_MODEL=nvidia/nemotron-3.5-lightning:free</code> in the local <code>.env</code> file, run <code>npm install</code>, then <code>npm start</code> and open <code>http://localhost:5500</code>.</p>
+      <p class="small">Model availability, free-tier limits, and provider data terms can change; check them before submitting resume text.</p>
     </section>
   </main>
   <script>

@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createResumeReview, GeminiReviewError } from './server/gemini.js';
+import { createResumeReview, OpenRouterReviewError } from './server/openrouter.js';
 
 const app = express();
 const port = Number(process.env.PORT) || 5500;
@@ -35,8 +35,8 @@ app.post('/api/review', async (request, response) => {
     return;
   }
 
-  if (!process.env.GEMINI_API_KEY) {
-    response.status(503).json({ error: 'The Gemini API key is not configured. Add GEMINI_API_KEY to your local .env file.' });
+  if (!process.env.OPENROUTER_API_KEY) {
+    response.status(503).json({ error: 'The OpenRouter API key is not configured. Add OPENROUTER_API_KEY to your local .env file.' });
     return;
   }
 
@@ -44,7 +44,7 @@ app.post('/api/review', async (request, response) => {
     const review = await createResumeReview(resumeText);
     response.json(review);
   } catch (error) {
-    if (error instanceof GeminiReviewError) {
+    if (error instanceof OpenRouterReviewError) {
       response.status(error.statusCode).json({ error: error.message });
       return;
     }
