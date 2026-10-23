@@ -37,7 +37,7 @@ Build mode: fast
 ## Final Review
 
 - [ ] Final review complete — feedback resolved and learner confirms the proof of concept is ready to ship.
-- [ ] Re-verify a full OpenRouter review with a fictional resume after configuring `OPENROUTER_API_KEY` and `OPENROUTER_MODEL`; confirm the required structured tool call returns grounded suggestions and rewrites.
+- [x] Re-verified a full OpenRouter review with a fictional resume: the required structured tool call returned five grounded suggestions with rewrites, and the learner confirmed their review worked.
 
 ## Code Tour and App Map
 
