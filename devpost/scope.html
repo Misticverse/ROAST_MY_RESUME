@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roast My Resume — Scope</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1c1c23;
+      --muted: #514f5c;
+      --paper: #fffaf3;
+      --line: #1c1c23;
+      --orange: #d94f24;
+      --orange-pale: #f9e3d7;
+      --blue: #315777;
+      --blue-pale: #dfeaf3;
+      --green: #205d49;
+      --green-pale: #dceee2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #eee8df;
+      color: var(--ink);
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { width: min(960px, calc(100% - 32px)); margin: 48px auto 72px; }
+    .eyebrow {
+      color: var(--orange);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 8px 0; font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.03; letter-spacing: -.055em; }
+    h2 { margin: 0 0 14px; font-size: 1.35rem; letter-spacing: -.025em; }
+    h3 { margin: 0 0 6px; font-size: 1rem; }
+    p { margin: 0 0 12px; }
+    .tagline {
+      max-width: 690px;
+      margin: 18px 0 0 24px;
+      padding-left: 20px;
+      border-left: 3px solid var(--orange);
+      color: var(--ink);
+      font-size: 1.2rem;
+      font-style: italic;
+      line-height: 1.8;
+    }
+    .meta { margin: 22px 0 30px; color: var(--muted); font-size: .88rem; }
+    section {
+      margin-top: 20px;
+      padding: 26px;
+      --box-fill: var(--paper);
+    }
+    section, .resume-input-frame, .panel, details {
+      position: relative;
+      isolation: isolate;
+      background: transparent;
+    }
+    section::before, .resume-input-frame::before, .panel::before, details::before,
+    section::after, .resume-input-frame::after, .panel::after, details::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px);
+    }
+    section::before, .resume-input-frame::before, .panel::before, details::before {
+      z-index: -2;
+      background: var(--line);
+    }
+    section::after, .resume-input-frame::after, .panel::after, details::after {
+      inset: 1px;
+      z-index: -1;
+      background: var(--box-fill);
+      clip-path: polygon(11px 0, calc(100% - 11px) 0, 100% 11px, 100% calc(100% - 11px), calc(100% - 11px) 100%, 11px 100%, 0 calc(100% - 11px), 0 11px);
+    }
+    .resume-input-frame { --box-fill: #fff; }
+    .resume-input {
+      display: block;
+      width: 100%;
+      min-height: 260px;
+      resize: vertical;
+      padding: 20px;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      line-height: 1.65;
+      clip-path: polygon(11px 0, calc(100% - 11px) 0, 100% 11px, 100% calc(100% - 11px), calc(100% - 11px) 100%, 11px 100%, 0 calc(100% - 11px), 0 11px);
+    }
+    .resume-input::placeholder { color: #85828a; opacity: 1; }
+    .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .panel { padding: 18px; }
+    .roast { --box-fill: var(--orange-pale); }
+    .feedback { --box-fill: var(--blue-pale); }
+    .feedback ol { padding-left: 20px; margin: 10px 0 0; }
+    .feedback li { margin: 8px 0; }
+    .privacy { margin-top: 14px; color: var(--muted); font-size: .9rem; }
+    .boundary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    details { --box-fill: #fff; }
+    summary { cursor: pointer; padding: 14px 16px; font-weight: 750; }
+    details p, details ul { margin: 0; padding: 0 16px 16px; color: var(--muted); }
+    details ul { padding-left: 34px; }
+    .now summary { color: var(--green); }
+    .later summary { color: var(--blue); }
+    .cut summary { color: #8b5a45; }
+    .note { color: var(--muted); font-size: .88rem; }
+    @media (max-width: 680px) {
+      main { margin-top: 28px; }
+      section { padding: 20px; }
+      .columns, .boundary-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Build With AI: Basics · Scope</div>
+      <h1>ROAST MY RESUME</h1>
+      <blockquote class="tagline">A resume roast that makes you laugh.<br>Feedback that helps you improve.</blockquote>
+      <p class="meta">Proof-of-concept scope · Status: approved</p>
+    </header>
+
+    <section aria-labelledby="resume-input-title">
+      <h2 id="resume-input-title">PASTE YOUR RESUME</h2>
+      <div class="resume-input-frame">
+        <textarea class="resume-input" aria-label="Resume text input" placeholder="Paste your resume text here..."></textarea>
+      </div>
+    </section>
+
+    <section aria-labelledby="review-title">
+      <h2 id="review-title">BURN AND BLUEPRINT</h2>
+      <div class="columns">
+        <div class="panel roast">
+          <h3>The Roast</h3>
+          <p>A quick, playful roast inspired by your resume. Funny, never mean.</p>
+        </div>
+        <div class="panel feedback">
+          <h3>Real Talk</h3>
+          <p>Every distinct, actionable improvement supported by your resume, with quotes and explanations.</p>
+          <ol>
+            <li>See what could be clearer or more compelling.</li>
+            <li>Understand why each change may help.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="panel feedback">
+        <h3>Rewrite</h3>
+        <p>Matching rewrites appear below Real Talk, with clear placeholders instead of made-up details.</p>
+      </div>
+      <p class="privacy">Include a clear, accurate note about whether pasted text is stored; do not promise “nothing is stored” unless the implementation truly guarantees it.</p>
+    </section>
+
+    <section aria-labelledby="boundary-title">
+      <h2 id="boundary-title">THE PROOF OF CONCEPT BOUNDARY</h2>
+      <div class="boundary-grid">
+        <details class="now" open>
+          <summary>Now</summary>
+          <p>One-page, text-only paste-to-results flow. Side-by-side roast and Real Talk, followed by matching rewrites. Include all useful, distinct improvements without a fixed count or fabricated resume facts.</p>
+        </details>
+        <details class="later">
+          <summary>Later</summary>
+          <p>No later features identified yet. Keep this open for ideas that emerge after the core demo works.</p>
+        </details>
+        <details class="cut">
+          <summary>Cut from v1</summary>
+          <ul>
+            <li>Accounts and saved profiles: not needed for the core loop.</li>
+            <li>File uploads: paste-only keeps the experiment manageable.</li>
+            <li>Persistent database: unnecessary for this proof of concept.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <section aria-labelledby="why-title">
+      <h2 id="why-title">WHY THIS MATTERS</h2>
+      <p>The learner cares about the stress of job hunting and resumes among their peers. The project should stay small enough to finish, while giving people a laugh and feedback they can actually use.</p>
+      <p class="note">Deployment is optional. The goal is a working, demonstrable proof of concept—not a complete product.</p>
+    </section>
+  </main>
+</body>
+</html>

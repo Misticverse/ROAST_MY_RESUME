@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eee8df">
+  <title>Roast My Resume</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <p class="eyebrow">A little roast. A lot of real talk.</p>
+      <h1>ROAST MY<br><span>RESUME</span></h1>
+      <p class="tagline">A resume roast that makes you laugh.<br>Feedback that helps you improve.</p>
+    </header>
+
+    <section class="resume-section" aria-labelledby="resume-heading">
+      <h2 id="resume-heading">Paste your resume</h2>
+      <p class="section-intro">Plain text works best. We’ll look at the writing, not your career choices.</p>
+      <form id="review-form">
+        <label class="sr-only" for="resume-text">Resume text</label>
+        <textarea
+          id="resume-text"
+          name="resumeText"
+          maxlength="12000"
+          placeholder="Paste your resume text here..."
+          spellcheck="false"
+        ></textarea>
+        <div class="form-footer">
+          <p id="character-count" class="character-count">0 / 12,000</p>
+          <button id="submit-button" type="submit">
+            <span class="button-label">Roast my resume</span>
+            <span class="button-arrow" aria-hidden="true">↗</span>
+          </button>
+        </div>
+      </form>
+      <p class="privacy-note">
+        Your resume is sent to Google Gemini to create this review. This website does not save your resume or results.
+        Google's unpaid API terms allow submitted content to be used to improve Google products and may include human review.
+        Please don't paste sensitive information.
+      </p>
+    </section>
+
+    <p id="status-message" class="status-message" role="status" aria-live="polite" hidden></p>
+
+    <section id="results" class="results-section" aria-labelledby="results-heading" hidden>
+      <h2 id="results-heading">Your review</h2>
+      <div class="results-grid">
+        <article class="result-card roast-card">
+          <h3 class="card-kicker">The Roast</h3>
+          <p id="roast-result" class="roast-result"></p>
+        </article>
+        <article class="result-card feedback-card">
+          <h3 class="card-kicker">Real Talk</h3>
+          <ol id="feedback-list" class="feedback-list"></ol>
+        </article>
+        <article class="result-card rewrite-card">
+          <h3 class="card-kicker">Rewrite</h3>
+          <ol id="rewrite-list" class="rewrite-list"></ol>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
