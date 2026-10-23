@@ -19,7 +19,7 @@ Build mode: fast
   Learner check: Open `http://localhost:5500`, paste the sample resume, submit it, and check whether the compact roast, Real Talk explanations, and separate Rewrite section feel like the project you intended. Share any change you'd want before the remaining edge cases are finished.
   Commit: `Build resume review core journey`
 
-- [ ] **2. Handle minimal input and review failures safely**
+- [x] **2. Handle minimal input and review failures safely**
   Becomes usable: Empty or fewer-than-five-word text gets a pointed but kind roast without a Gemini call; loading, repeat submissions, provider errors, and invalid Gemini replies have clear behavior without invented feedback or unsafe rendering.
   Why now: The successful core flow is in place; complete its required boundary states and failure handling before considering the proof of concept ready.
   PRD ref: `prd.md > Features and Behavior`, `prd.md > Acceptance criteria`, `prd.md > States and Boundaries`, `prd.md > Open Questions`
@@ -37,6 +37,7 @@ Build mode: fast
 ## Final Review
 
 - [ ] Final review complete — feedback resolved and learner confirms the proof of concept is ready to ship.
+- [ ] Verify a full Gemini review after resolving the upstream HTTP 402 billing requirement; do not mark the proof of concept ready until the live core journey succeeds.
 
 ## Code Tour and App Map
 
@@ -54,5 +55,5 @@ Activity mode: [live app and editor, explicit static fallback, focused alternati
 - Replaced the original three-suggestion limit with all distinct, actionable improvements supported by the resume, and separated rewrites into a full-width section below Real Talk. The learner also chose a content-sized Roast card; this changes the approved result layout and output behavior at their request.
 - After hands-on feedback, kept the outer panels' clipped corners subtly rounded and gave the inner text field, button, and status message a more pronounced curved border.
 - Switched the local Express app's default port from 3000 to 5500 after stopping the conflicting VS Code preview; updated the run instructions to match.
-- The learner's requests received different Gemini upstream errors. The app now shows safe HTTP status codes for provider errors; a separate fictional resume request previously succeeded with three grounded suggestions.
+- The learner's later requests exposed an upstream HTTP 402 billing requirement. The current Gemini model documentation still lists `gemini-3.6-flash` as stable; check the linked AI Studio project's billing/prepaid balance before another live review.
 - Added a roast-only local response for blank or fewer-than-five-word input and surfaced Gemini's upstream HTTP status for quota, billing, model, and availability errors so they are easier to distinguish.
