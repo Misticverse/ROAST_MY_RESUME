@@ -15,7 +15,7 @@ The API key stays in a private `.env` file read by the server; it is never sent 
 
 1. The browser loads `public/index.html`, its styles, and its JavaScript from the local Node server.
 2. The user pastes resume text and submits it. The browser shows a loading state and sends the text to `POST /api/review`.
-3. The server rejects empty or oversized requests, adds the review instructions, and calls Gemini over HTTPS using the server-only API key.
+3. The server rejects malformed or oversized requests. For empty input or fewer than five words, it returns a roast without calling Gemini; otherwise, it adds the review instructions and calls Gemini over HTTPS using the server-only API key.
 4. Gemini returns structured review data. The server checks that it has the expected fields and all returned suggestions are grounded in the resume; it rejects reviewable results with no suggestions and accepts no suggestions for minimal input.
 5. The browser displays the roast, Real Talk suggestions, and matching rewrites in separate result areas. It keeps them only in the current page; leaving or refreshing the page clears them.
 
@@ -149,8 +149,8 @@ project/
 
 ## Important Failure Modes
 
-- **Missing API key or unavailable model** → keep the page usable, show a clear setup/provider message, and do not return a fake successful review.
-- **Gemini is slow, rate-limited, or unavailable** → show a retryable error; don't lose the pasted text from the open page or save it elsewhere.
+- **Missing API key or unavailable model** → keep the page usable, show a clear setup/provider message, and do not return a fake successful review. Include safe upstream HTTP status codes for key/model, billing, quota, and request errors. Locally handled empty or fewer-than-five-word input does not require an API key.
+- **Gemini is slow, rate-limited, or unavailable** → show a retryable error with the upstream HTTP status; don't lose the pasted text from the open page or save it elsewhere.
 - **Gemini returns malformed or ungrounded output** → reject the response and show an error instead of displaying empty reviewable feedback, fabricated quotes, or success-shaped fallback content.
 
 ## What Was Simplified and Why

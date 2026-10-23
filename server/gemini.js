@@ -128,18 +128,30 @@ export async function createResumeReview(resumeText) {
 
   if (!response.ok) {
     if (response.status === 401 || response.status === 403) {
-      throw new GeminiReviewError('Gemini rejected the API key. Check your local key and model access.', 503);
+      throw new GeminiReviewError(`Gemini rejected the API key or model access (HTTP ${response.status}). Check your local key and permissions.`, 503);
+    }
+
+    if (response.status === 402) {
+      throw new GeminiReviewError('Gemini requires an active billing balance (HTTP 402). Check your Google AI billing settings.', 503);
     }
 
     if (response.status === 429) {
-      throw new GeminiReviewError('Gemini is rate-limited right now. Wait a little, then try again.', 503);
+      throw new GeminiReviewError('Gemini rate limit or quota reached (HTTP 429). Check your usage limits and try again later.', 503);
     }
 
     if (response.status >= 500) {
-      throw new GeminiReviewError('Gemini is temporarily unavailable. Please try again.', 503);
+      throw new GeminiReviewError(`Gemini is temporarily unavailable (HTTP ${response.status}). Please try again shortly.`, 503);
     }
 
-    throw new GeminiReviewError('Gemini could not process this review request. Check the model setup and try again.', 502);
+    if (response.status === 404) {
+      throw new GeminiReviewError(`Gemini model "${model}" was not found (HTTP 404). Check model availability and access.`, 502);
+    }
+
+    if (response.status === 400) {
+      throw new GeminiReviewError('Gemini rejected the request (HTTP 400). Check the request and model setup.', 502);
+    }
+
+    throw new GeminiReviewError(`Gemini could not process this review request (HTTP ${response.status}). Check the model setup and try again.`, 502);
   }
 
   let payload;

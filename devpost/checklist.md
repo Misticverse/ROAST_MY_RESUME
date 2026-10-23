@@ -20,12 +20,12 @@ Build mode: fast
   Commit: `Build resume review core journey`
 
 - [ ] **2. Handle minimal input and review failures safely**
-  Becomes usable: Empty or too-short text gets a pointed but kind roast with no suggestions; loading, repeat submissions, provider errors, and invalid Gemini replies have clear behavior without invented feedback or unsafe rendering.
+  Becomes usable: Empty or fewer-than-five-word text gets a pointed but kind roast without a Gemini call; loading, repeat submissions, provider errors, and invalid Gemini replies have clear behavior without invented feedback or unsafe rendering.
   Why now: The successful core flow is in place; complete its required boundary states and failure handling before considering the proof of concept ready.
   PRD ref: `prd.md > Features and Behavior`, `prd.md > Acceptance criteria`, `prd.md > States and Boundaries`, `prd.md > Open Questions`
   Spec ref: `spec.md > Components`, `spec.md > Gemini Request and Response`, `spec.md > Important Failure Modes`, `spec.md > Data Model`
-  Build: Add minimal-input handling, clear loading and retryable error states, repeat submission with edited text, response-shape and quote-grounding checks, output-safe rendering, and request-size limits. Keep the page disclosure accurate and confirm text/results remain only in active memory.
-  Verify (mechanical): Check empty and short input returns a roast with zero suggestions and does not call Gemini; exercise a missing/invalid key and malformed provider response and confirm clear errors with no success-shaped fallback; submit a valid sample and verify all returned suggestions are grounded and paired with rewrites; run syntax checks and confirm the page still serves.
+  Build: Return a local roast for empty or fewer-than-five-word input without calling Gemini; keep clear loading and retryable error states, repeat submission with edited text, response-shape and quote-grounding checks, output-safe rendering, and request-size limits. Keep the page disclosure accurate and confirm text/results remain only in active memory.
+  Verify (mechanical): Check empty and four-word input return a roast with zero suggestions and no Gemini call; check five-word input reaches the configured-key guard; exercise a missing/invalid key, rate limit, provider 5xx, and malformed provider response and confirm clear errors with no success-shaped fallback; submit a valid sample and verify all returned suggestions are grounded and paired with rewrites; run syntax checks and confirm the page still serves.
   Learner check: Try a blank submission, a very short one, and a second submission after editing the resume. Check that the page explains what happened and never shows made-up feedback.
   Commit: `Handle review edge cases`
 
@@ -54,4 +54,5 @@ Activity mode: [live app and editor, explicit static fallback, focused alternati
 - Replaced the original three-suggestion limit with all distinct, actionable improvements supported by the resume, and separated rewrites into a full-width section below Real Talk. The learner also chose a content-sized Roast card; this changes the approved result layout and output behavior at their request.
 - After hands-on feedback, kept the outer panels' clipped corners subtly rounded and gave the inner text field, button, and status message a more pronounced curved border.
 - Switched the local Express app's default port from 3000 to 5500 after stopping the conflicting VS Code preview; updated the run instructions to match.
-- The learner's requests received Gemini temporary-unavailability errors; the server maps Gemini 5xx responses to this message. A separate fictional resume request succeeded with three grounded suggestions, indicating the 5500 app and API key can work while provider availability remains intermittent.
+- The learner's requests received different Gemini upstream errors. The app now shows safe HTTP status codes for provider errors; a separate fictional resume request previously succeeded with three grounded suggestions.
+- Added a roast-only local response for blank or fewer-than-five-word input and surfaced Gemini's upstream HTTP status for quota, billing, model, and availability errors so they are easier to distinguish.

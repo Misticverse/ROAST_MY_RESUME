@@ -8,6 +8,7 @@ const port = Number(process.env.PORT) || 5500;
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 const publicDirectory = path.join(projectRoot, 'public');
 const maximumResumeLength = 12_000;
+const minimumReviewWords = 5;
 
 app.use(express.json({ limit: '32kb' }));
 app.use(express.static(publicDirectory));
@@ -15,13 +16,22 @@ app.use(express.static(publicDirectory));
 app.post('/api/review', async (request, response) => {
   const resumeText = request.body?.resumeText;
 
-  if (typeof resumeText !== 'string' || resumeText.trim().length === 0) {
+  if (typeof resumeText !== 'string') {
     response.status(400).json({ error: 'Paste your resume text before requesting a review.' });
     return;
   }
 
   if (resumeText.length > maximumResumeLength) {
     response.status(413).json({ error: `Please keep the resume under ${maximumResumeLength.toLocaleString()} characters.` });
+    return;
+  }
+
+  const wordCount = resumeText.trim().split(/\s+/).filter(Boolean).length;
+  if (wordCount < minimumReviewWords) {
+    const roast = wordCount === 0
+      ? 'Your resume is playing hide-and-seek. Paste a few lines so I can review it.'
+      : 'This resume has barely clocked in. Add a few more lines for a useful review.';
+    response.json({ roast, feedback: [] });
     return;
   }
 

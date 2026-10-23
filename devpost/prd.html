@@ -166,8 +166,8 @@
         <p>Show the short roast and all distinct, actionable, resume-grounded suggestions, with matching rewrites in a separate section.</p>
       </details>
       <details>
-        <summary>Empty or very short input</summary>
-        <p>Show a more pointed roast about the missing or minimal input. Leave Real Talk empty; do not invent feedback.</p>
+        <summary>Empty or fewer than five words</summary>
+        <p>Show a more pointed roast about the missing or minimal input. Leave Real Talk and Rewrite empty and do not call Gemini.</p>
       </details>
       <details>
         <summary>Pasted-text handling</summary>
@@ -181,7 +181,7 @@
         <li>Submitting a usable resume returns a roast and all distinct, actionable suggestions supported by its text, without a fixed three-item limit.</li>
         <li>Each Real Talk suggestion quotes text from the resume and includes an explanation; its rewrite appears only in the separate Rewrite section.</li>
         <li>No rewrite presents missing accomplishments or facts as true; a clear placeholder is used instead.</li>
-        <li>Empty or too-short input shows a roast and no Real Talk suggestions.</li>
+        <li>Empty input or fewer than five words shows only a roast and makes no Gemini request.</li>
         <li>The pasted-text note accurately describes what the app does.</li>
       </ul>
     </section>
