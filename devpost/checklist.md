@@ -37,7 +37,7 @@ Build mode: fast
 ## Final Review
 
 - [ ] Final review complete — feedback resolved and learner confirms the proof of concept is ready to ship.
-- [x] Verify a full OpenRouter review with a fictional resume after configuring `OPENROUTER_API_KEY` and `OPENROUTER_MODEL`; the local API returned three suggestions with grounded quotes and rewrites.
+- [ ] Re-verify a full OpenRouter review with a fictional resume after configuring `OPENROUTER_API_KEY` and `OPENROUTER_MODEL`; confirm the required structured tool call returns grounded suggestions and rewrites.
 
 ## Code Tour and App Map
 
@@ -65,3 +65,4 @@ Activity mode: [live app and editor, explicit static fallback, focused alternati
 - After the learner's demo resume showed a generic failure, investigation found upstream timeouts while reading a response body were escaping timeout handling. These now return a clear retryable HTTP 504 message, like request timeouts during connection.
 - The selected free model timed out again during the learner's hands-on test. Without changing the selected model or removing the no-fixed-suggestion-limit behavior, the request now prefers OpenRouter's lowest-latency compatible provider and asks for concise feedback. A live fictional test is needed to verify whether this reduces delays; the learner's reported timeout remains unresolved.
 - The selected free-model catalog entry does not advertise OpenRouter's `response_format` parameter, unlike its paid base-model entry. A tiny JSON-only prompt succeeded without that parameter, so it was removed while retaining server validation. A full request exhausted the 8,192-token budget at minimal reasoning; a tiny request with reasoning disabled returned valid JSON in one second and used zero reasoning tokens. With reasoning disabled, the full fictional API review succeeded in four seconds with five grounded suggestions.
+- The learner received an invalid-JSON error from the free Nemotron Lightning model. OpenRouter's catalog advertises tool calling and `tool_choice` for this model but not `response_format`; the adapter now requires a schema-defined `submit_resume_review` tool call and routes only to providers supporting the request parameters, preserving the selected free model.
