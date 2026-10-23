@@ -167,6 +167,11 @@ button:disabled { cursor: wait; opacity: .75; }
 .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .results-grid--roast-only { grid-template-columns: 1fr; }
 .result-card { min-height: 190px; padding: 20px; }
+.roast-card, .feedback-card { border-radius: var(--control-radius); }
+.roast-card::before, .roast-card::after, .feedback-card::before, .feedback-card::after {
+  border-radius: var(--control-radius);
+  clip-path: none;
+}
 .roast-card { align-self: start; min-height: 0; --panel-fill: var(--orange-pale); }
 .feedback-card { --panel-fill: var(--blue-pale); }
 .rewrite-card { grid-column: 1 / -1; min-height: 0; --panel-fill: var(--paper); }

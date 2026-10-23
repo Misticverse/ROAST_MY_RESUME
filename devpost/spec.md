@@ -50,7 +50,7 @@ Documentation:
 
 ## Look and Feel
 
-Carry forward `prd.md > Look and Feel` and `scope.md > Inspiration & Identity`: warm orange for the playful roast, blue for calm constructive feedback, dark ink, and a warm off-white background. Keep the two results side by side on wider screens and stacked on narrow screens. Retain the mockup's bold, clipped-panel visual language and approachable copy. The roast stays funny but not cruel; suggestions stay specific, calm, and grounded in the resume.
+Carry forward `prd.md > Look and Feel` and `scope.md > Inspiration & Identity`: warm orange for the playful roast, blue for calm constructive feedback, dark ink, and a warm off-white background. Keep the two results side by side on wider screens and stacked on narrow screens. Retain the mockup's bold, clipped outer-panel visual language and approachable copy, while giving the Roast and Real Talk result cards curved corners that match the resume input. The roast stays funny but not cruel; suggestions stay specific, calm, and grounded in the resume.
 
 ## Components
 

@@ -38,6 +38,7 @@ Build mode: fast
 
 - [ ] Final review complete — feedback resolved and learner confirms the proof of concept is ready to ship.
 - [x] Re-verified a full OpenRouter review with a fictional resume: the required structured tool call returned five grounded suggestions with rewrites, and the learner confirmed their review worked.
+- [ ] Round the Roast and Real Talk card corners to match the resume input; learner retry pending.
 
 ## Code Tour and App Map
 
@@ -66,3 +67,4 @@ Activity mode: [live app and editor, explicit static fallback, focused alternati
 - The selected free model timed out again during the learner's hands-on test. Without changing the selected model or removing the no-fixed-suggestion-limit behavior, the request now prefers OpenRouter's lowest-latency compatible provider and asks for concise feedback. A live fictional test is needed to verify whether this reduces delays; the learner's reported timeout remains unresolved.
 - The selected free-model catalog entry does not advertise OpenRouter's `response_format` parameter, unlike its paid base-model entry. A tiny JSON-only prompt succeeded without that parameter, so it was removed while retaining server validation. A full request exhausted the 8,192-token budget at minimal reasoning; a tiny request with reasoning disabled returned valid JSON in one second and used zero reasoning tokens. With reasoning disabled, the full fictional API review succeeded in four seconds with five grounded suggestions.
 - The learner received an invalid-JSON error from the free Nemotron Lightning model. OpenRouter's catalog advertises tool calling and `tool_choice` for this model but not `response_format`; the adapter now requires a schema-defined `submit_resume_review` tool call and routes only to providers supporting the request parameters, preserving the selected free model.
+- Final-review feedback: the Roast and Real Talk boxes had angular clipped corners while the resume input was rounded. Their corners now match the input; the bold clipped outer panels remain unchanged.
