@@ -32,7 +32,7 @@ Build mode: fast
 ## Hands-on Checkpoints
 
 - [x] Early usable behavior explored — after slice 1; learner tried the review and gave early feedback. The previous Gemini billing issue blocked the live review.
-- [ ] Final kick-the-tires exploration and feedback completed — after slice 2; learner tries the full core journey and awkward inputs.
+- [x] Final kick-the-tires exploration and feedback completed — learner confirmed a full review works and blank or short input shows only the roast.
 
 ## Final Review
 
