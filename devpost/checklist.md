@@ -38,7 +38,7 @@ Build mode: fast
 
 - [ ] Final review complete — feedback resolved and learner confirms the proof of concept is ready to ship.
 - [x] Re-verified a full OpenRouter review with a fictional resume: the required structured tool call returned five grounded suggestions with rewrites, and the learner confirmed their review worked.
-- [ ] Round the Roast and Real Talk card corners to match the resume input; learner retry pending.
+- [x] Rounded the Roast and Real Talk card corners to match the resume input; learner confirmed the result.
 
 ## Code Tour and App Map
 
