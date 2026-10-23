@@ -149,7 +149,7 @@ project/
 ## Important Failure Modes
 
 - **Missing API key or unavailable model** → keep the page usable, show a clear setup/provider message, and do not return a fake successful review. Include safe upstream HTTP status codes for key/model, billing, quota, and request errors. Locally handled empty or fewer-than-five-word input does not require an API key.
-- **OpenRouter or its model provider is slow, rate-limited, or unavailable** → show a retryable error with the upstream HTTP status; don't lose the pasted text from the open page or save it elsewhere.
+- **OpenRouter or its model provider is slow, rate-limited, or unavailable** → show a retryable error with the upstream HTTP status; timeouts while connecting or reading the response return HTTP 504. Don't lose the pasted text from the open page or save it elsewhere.
 - **Model returns malformed or ungrounded output** → reject the response and show an error instead of displaying empty reviewable feedback, fabricated quotes, or success-shaped fallback content.
 
 ## What Was Simplified and Why

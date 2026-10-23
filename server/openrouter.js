@@ -73,6 +73,10 @@ function validateReview(review, resumeText) {
   return { roast: review.roast, feedback };
 }
 
+function isTimeoutError(error) {
+  return error?.name === 'TimeoutError' || error?.name === 'AbortError';
+}
+
 export async function createResumeReview(resumeText) {
   let response;
 
@@ -99,7 +103,7 @@ export async function createResumeReview(resumeText) {
       }),
     });
   } catch (error) {
-    if (error?.name === 'TimeoutError' || error?.name === 'AbortError') {
+    if (isTimeoutError(error)) {
       throw new OpenRouterReviewError('OpenRouter took too long to respond. Please try again.', 504);
     }
 
@@ -142,6 +146,10 @@ export async function createResumeReview(resumeText) {
   try {
     payload = await response.json();
   } catch (error) {
+    if (isTimeoutError(error)) {
+      throw new OpenRouterReviewError('OpenRouter took too long to respond. Please try again.', 504);
+    }
+
     if (error instanceof SyntaxError) {
       throw new OpenRouterReviewError('OpenRouter returned an unreadable response. Please try again.');
     }
