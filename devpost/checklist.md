@@ -45,15 +45,15 @@ Build mode: fast
 
 ## Code Tour and App Map
 
-- [ ] Learning activity complete — connect one actual review action to its page, server/API code, and observed verification.
-- [ ] Optional edit and transfer reflection addressed — offer one harmless interface-text edit and one optional transfer question; record if declined.
-- [ ] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse.
+- [x] Learning activity complete — provided an evidence-based recap connecting a live review action, server-side quote validation, and observed grounded suggestions; this was a recap, not an interactive code tour.
+- [x] Optional edit and transfer reflection addressed — the learner asked to proceed to the next stage, so no edit or reflection question was pursued.
+- [x] `devpost/app-map.html` generated from finished code, opened and checked offline, and shown, including a project-grounded practice to reuse.
 
-Activity and evidence: [record what actually happened and the code or verification evidence]
-Route and stops: [record actual source paths and stops completed]
-Edit outcome: [record tried/kept/reverted/declined and verification]
-Reflection: [record offered/answered/declined/already covered; personal answer only in ignored learner profile]
-Activity mode: [live app and editor, explicit static fallback, focused alternative, prior practice, or recap]
+Activity and evidence: Brief recap linked the PRD's quote-grounding requirement to `server/openrouter.js > validateReview()` and the live fictional review, which returned two grounded suggestions without criticizing its strong metrics.
+Route and stops: The map provides a reference route through `public/index.html > #review-form`, `public/app.js > renderReview()`, and `server.js > POST /api/review` to `server/openrouter.js > validateReview()`; the learner did not perform an editor tour.
+Edit outcome: Not offered or performed; the learner asked to proceed to the next stage.
+Reflection: Not asked; no personal response recorded.
+Activity mode: Evidence-based recap and offline app map; no interactive tour or edit.
 
 ## Revisions
 - Replaced the original three-suggestion limit with all distinct, actionable improvements supported by the resume, and separated rewrites into a full-width section below Real Talk. The learner also chose a content-sized Roast card; this changes the approved result layout and output behavior at their request.
