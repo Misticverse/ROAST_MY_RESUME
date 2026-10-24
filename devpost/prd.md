@@ -21,7 +21,7 @@ Source: `scope.md > The Core Loop` and `What "Working" Looks Like`.
 
 ## Screens and Layout
 
-There is one page and one paste-to-results flow. The resume input sits above the results; the roast and Real Talk appear side by side, with the separate Rewrite section below them. The roast card fits its content instead of stretching to match Real Talk. The page includes a clear note about how pasted text is handled.
+There is one page and one paste-to-results flow. The resume input sits above a single vertical stack of results: the Roast, Real Talk, and separate Rewrite section, in that order, at every screen width. The Roast card fits its content. The page includes a clear note about how pasted text is handled.
 Source: `scope.md > The Core Loop`, `What "Working" Looks Like`, and `The POC Boundary`.
 
 ## Look and Feel

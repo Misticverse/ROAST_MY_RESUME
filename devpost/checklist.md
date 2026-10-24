@@ -16,7 +16,7 @@ Build mode: fast
   Spec ref: `spec.md > Stack`, `spec.md > Where It Runs and How Someone Tries It`, `spec.md > Components`, `spec.md > OpenRouter Request and Response`, `spec.md > Data Model`, `spec.md > File Structure`
   Build: Set up Node.js/Express and the planned files; add a responsive one-page interface based on the scope mockup; load the OpenRouter key from `.env`; implement the review route and OpenRouter adapter; render the roast, validated resume-quoted suggestions, and matching rewrites in separate areas; include the provider disclosure; do not persist or log resume data.
   Verify (mechanical): Run JavaScript syntax checks, start the server, submit fictional sample resume text through the review route using the configured OpenRouter key, and verify every returned suggestion is prioritized, grounded in the submitted text, and paired with a rewrite; verify the interface keeps rewrites out of Real Talk and renders all returned suggestions (including a four-item validation fixture); inspect the response and server output for errors or leaked secrets. Confirm the configured model is `nvidia/nemotron-3.5-lightning:free` and available to the account.
-  Learner check: Open `http://localhost:5500`, paste the sample resume, submit it, and check whether the compact roast, Real Talk explanations, and separate Rewrite section feel like the project you intended. Share any change you'd want before the remaining edge cases are finished.
+  Learner check: Start the Express app with `npm.cmd start`, open `http://localhost:5500`, paste the sample resume, submit it, and check whether the compact roast, Real Talk explanations, and separate Rewrite section feel like the project you intended. Stop it with Ctrl+C in the terminal when finished.
   Commit: `Build resume review core journey`
 
 - [x] **2. Handle minimal input and review failures safely**
@@ -36,9 +36,12 @@ Build mode: fast
 
 ## Final Review
 
-- [ ] Final review complete — feedback resolved and learner confirms the proof of concept is ready to ship.
+- [x] Final review complete — the learner asked to proceed to `6-ship` after the live API and browser checks; no further changes were requested.
 - [x] Re-verified a full OpenRouter review with a fictional resume: the required structured tool call returned five grounded suggestions with rewrites, and the learner confirmed their review worked.
 - [x] Rounded the Roast and Real Talk card corners to match the resume input; learner confirmed the result.
+- [x] Retested the Maya-style resume through the live API after the prompt update: the roast targeted the tense mismatch, and the response did not invent a date or CRM detail or criticize the strong metric/account scope.
+- [x] Retested the Maya-style resume with curated prompt examples through the live API: two grounded suggestions called out the tense mismatch without criticizing the 71%-to-89% metric or account scope; no CRM or unsupported date was introduced.
+- [x] Retested The Roast in the browser with the Maya-style resume: it specifically teased the tense mismatch in one sentence without insulting the applicant.
 
 ## Code Tour and App Map
 
@@ -62,9 +65,15 @@ Activity mode: [live app and editor, explicit static fallback, focused alternati
 - Increased the upstream timeout to 90 seconds because the selected free model did not finish a fictional test within the prior 45-second limit.
 - A short request with a deliberately small 2,048-token limit exhausted that limit before returning complete JSON. The adapter uses an explicit JSON prompt and reports response-limit exhaustion; a short test at a larger token limit returned valid JSON, but the full review remains unverified.
 - A live fictional review returned JSON that lacked required fields, exposing that the prompt had not named the complete response schema. The required keys and types are now explicit; the full live review remains unchecked until a retry succeeds.
-- The learner reported a directory listing at `localhost:5500`. The Express app was not running; starting it with `npm.cmd start` from the repository root served the expected page and API on port 5500. The learner's browser confirmation remains part of the final hands-on review.
+- The learner once saw a directory listing from VS Code Go Live on port 5500; Go Live is separate from the Express app started with `npm.cmd start`.
 - After the learner's demo resume showed a generic failure, investigation found upstream timeouts while reading a response body were escaping timeout handling. These now return a clear retryable HTTP 504 message, like request timeouts during connection.
 - The selected free model timed out again during the learner's hands-on test. Without changing the selected model or removing the no-fixed-suggestion-limit behavior, the request now prefers OpenRouter's lowest-latency compatible provider and asks for concise feedback. A live fictional test is needed to verify whether this reduces delays; the learner's reported timeout remains unresolved.
 - The selected free-model catalog entry does not advertise OpenRouter's `response_format` parameter, unlike its paid base-model entry. A tiny JSON-only prompt succeeded without that parameter, so it was removed while retaining server validation. A full request exhausted the 8,192-token budget at minimal reasoning; a tiny request with reasoning disabled returned valid JSON in one second and used zero reasoning tokens. With reasoning disabled, the full fictional API review succeeded in four seconds with five grounded suggestions.
 - The learner received an invalid-JSON error from the free Nemotron Lightning model. OpenRouter's catalog advertises tool calling and `tool_choice` for this model but not `response_format`; the adapter now requires a schema-defined `submit_resume_review` tool call and routes only to providers supporting the request parameters, preserving the selected free model.
 - Final-review feedback: the Roast and Real Talk boxes had angular clipped corners while the resume input was rounded. Their corners now match the input; the bold clipped outer panels remain unchanged.
+- Final-review feedback: added curated prompt examples and guidance to prioritize supported writing issues, preserve strong metrics and scope, and avoid unsupported claims.
+- Final-review feedback: the roast sounded too polite. Tightened its prompt requirements and examples to make jokes sharper about corporate fluff while keeping them text-specific and non-personal.
+- A live sharper-roast test invented a date issue and a CRM detail. Reinforced grounding for roast premises and rewrites; verify no resume facts are invented in the next live retest.
+- The final prompt review found a remaining instruction that still capped suggestions at three; removed it and restored the resume-as-data and non-cruelty guardrails.
+- At the learner's request, Express now defaults to port 5500 for starting and stopping the full app with `npm.cmd start`; VS Code Go Live remains a separate static server.
+- The learner chose to keep the current single-column stack for Roast, Real Talk, and Rewrite; updated the scope, PRD, spec, and HTML companions to match.

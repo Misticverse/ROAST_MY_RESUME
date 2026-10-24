@@ -14,7 +14,7 @@ The split is the product: a playful roast that makes people want to share the re
 Students, freshers, and people applying for their first or second job—especially someone anxious about job hunting who wants both a laugh and useful resume feedback.
 
 ## The Core Loop
-On one screen, paste resume text and click once. Get a short roast beside Real Talk suggestions that quote resume text and explain useful improvements, with the matching rewrites in a separate section below. Include all distinct, actionable improvements the resume supports rather than stopping at three.
+On one screen, paste resume text and click once. Get a short roast, followed by Real Talk suggestions that quote resume text and explain useful improvements, with the matching rewrites in a separate section below. Include all distinct, actionable improvements the resume supports rather than stopping at three.
 
 ## Inspiration & Identity
 Playful but not cruel on the roast side; calm, clear, and constructive on the “Real Talk” side. The contrast between the two panels is central to the experience.

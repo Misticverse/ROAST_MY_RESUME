@@ -50,7 +50,7 @@ Documentation:
 
 ## Look and Feel
 
-Carry forward `prd.md > Look and Feel` and `scope.md > Inspiration & Identity`: warm orange for the playful roast, blue for calm constructive feedback, dark ink, and a warm off-white background. Keep the two results side by side on wider screens and stacked on narrow screens. Retain the mockup's bold, clipped outer-panel visual language and approachable copy, while giving the Roast and Real Talk result cards curved corners that match the resume input. The roast stays funny but not cruel; suggestions stay specific, calm, and grounded in the resume.
+Carry forward `prd.md > Look and Feel` and `scope.md > Inspiration & Identity`: warm orange for the playful roast, blue for calm constructive feedback, dark ink, and a warm off-white background. Keep the Roast, Real Talk, and Rewrite cards in one vertical stack at every screen width. Retain the mockup's bold, clipped outer-panel visual language and approachable copy, while giving the Roast and Real Talk result cards curved corners that match the resume input. The roast stays funny but not cruel; suggestions stay specific, calm, and grounded in the resume.
 
 ## Components
 
@@ -62,7 +62,7 @@ Implements `prd.md > The Core Journey` and `prd.md > States and Boundaries`.
 
 ### Page styling
 
-`public/styles.css` implements the established orange/blue palette, responsive side-by-side result panels, and visual hierarchy.
+`public/styles.css` implements the established orange/blue palette, vertically stacked result cards, and visual hierarchy.
 
 Implements `prd.md > Look and Feel`.
 
@@ -79,6 +79,8 @@ Implements `prd.md > Features and Behavior` and `prd.md > States and Boundaries`
 Implements `prd.md > Features and Behavior` and `prd.md > States and Boundaries`.
 
 ### OpenRouter review adapter
+
+The prompt uses the curated calibration examples in `server/reviewPromptExamples.js` to model grounded feedback, preserve useful metrics and scope details, avoid inventing outcomes, and deliver a one-line, single-sentence joke about a specific writing mistake without attacking the applicant. Roast and feedback are returned in the schema-defined structured function response.
 
 `server/openrouter.js` builds the focused resume-review prompt, calls OpenRouter's chat-completions endpoint using a Bearer `OPENROUTER_API_KEY`, parses the model's JSON content, and validates the response before returning it to the route.
 
