@@ -74,6 +74,13 @@ app.use((error, request, response, next) => {
   response.status(500).json({ error: 'The server could not complete that request.' });
 });
 
-app.listen(port, '127.0.0.1', () => {
-  console.log(`Roast My Resume is running at http://localhost:${port}`);
-});
+// 1. Export the app for Vercel's serverless environment
+export default app;
+
+// 2. Only run app.listen locally (not on Vercel)
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  const port = process.env.PORT || 5500;
+  app.listen(port, () => {
+    console.log(`Roast My Resume is running at http://localhost:${port}`);
+  });
+}
